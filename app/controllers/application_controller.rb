@@ -22,7 +22,6 @@ class ApplicationController < Sinatra::Base
     #your code here
     user = User.new(params)
     if !user.username.empty? && user.save
-      session[:user_id] = user.id
       redirect '/login'
     else
       redirect '/failure'
