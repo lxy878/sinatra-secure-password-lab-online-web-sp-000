@@ -1,5 +1,7 @@
 require "./config/environment"
 require "./app/models/user"
+
+require 'pry'
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -18,7 +20,12 @@ class ApplicationController < Sinatra::Base
 
   post "/signup" do
     #your code here
-
+    user = User.new(params)
+    if user.save && !user.username.empty?
+      redirect '/login'
+    else
+      redirect '/failure'
+    end
   end
 
   get '/account' do
@@ -33,6 +40,8 @@ class ApplicationController < Sinatra::Base
 
   post "/login" do
     ##your code here
+    binding.pry
+
   end
 
   get "/failure" do
